@@ -1,5 +1,11 @@
+import PropTypes from "prop-types";
+import { useState } from "react";
+import { GrupoInput } from "./GrupoInput";
 
-import { GrupoInput } from "./GrupoInput"
+export const Formulario = (props) => {
+    const [data, setData] = useState("");
+    const [quantidade, setQuantidade] = useState(0);
+    const [valor, setValor] = useState(0);
 
 function handleAdicionarNegociacao() {
     const negociacao = {
@@ -7,6 +13,15 @@ function handleAdicionarNegociacao() {
         quantidade: quantidade,
         valor: valor,
     };
+
+    props.quandoAdicionar(negociacao);
+
+    //resetar os campos após inserção
+
+    setData("");
+    setQuantidade(0);
+    setValor(0);
+}
 
     return (
         <form className="form-container">
@@ -32,5 +47,7 @@ function handleAdicionarNegociacao() {
     )
 }
 
-export default Formulario;
+Formulario.propTypes = {
+    quandoAdicionar: PropTypes.func.isRequired,
+};
 
